@@ -1,6 +1,12 @@
 use core::fmt;
 use std::{env, path};
 use image::{DynamicImage, ImageBuffer, Pixel, Rgba, RgbaImage};
+use session::Session;
+use prost::Message;
+
+mod session {
+  include!(concat!(env!("OUT_DIR"), "/_.rs"));
+}
 
 struct EncodeConfig {
   ignore_alpha: bool,
@@ -367,8 +373,28 @@ fn bits_to_u32(bits: Vec<u8>) -> u32 {
   result
 }
 
+fn protobufs() {
+  let session = Session {
+    username: "alza54".to_string(),
+    password: "pass_w0rd".to_string(),
+    token: "abcdef-abcdef-abcdef-abcdef".to_string()
+  };
+
+  // Encode the person into a vector of bytes (Vec<u8>)
+  let mut buf = Vec::new();
+  buf.reserve(session.encoded_len());
+  session.encode(&mut buf).unwrap();
+  println!("Encoded: {:?}", buf);
+
+  // Decode the vector of bytes back into a person
+  let decoded: Session = Session::decode(&*buf).unwrap();
+  println!("Decoded: {:?}", decoded);
+}
+
 fn main() {
   let args: Vec<String> = env::args().collect();
+
+  protobufs();
 
   if args.len() < 3 {
     eprintln!("Usage: {} <encode|decode> <image_path>", args[0]);
