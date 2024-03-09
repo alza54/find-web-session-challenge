@@ -1,0 +1,52 @@
+{
+  "name": "find-web-session-challenge",
+  "version": "1.0.0",
+  "description": "A fun example (HackMe/CrackMe) of utilising LSB image steganography in WebAssembly for hiding data in web applications",
+  "type": "module",
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "require": "./dist/module.cjs",
+      "import": "./dist/module.mjs"
+    }
+  },
+  "keywords": [
+    "re",
+    "reverse-engineering",
+    "webassembly",
+    "steganography",
+    "least-significant-bit",
+    "crackme",
+    "web-security"
+  ],
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alza54/find-web-session-challenge.git"
+  },
+  "homepage": "https://github.com/alza54/find-web-session-challenge#readme",
+  "bugs": {
+    "url": "https://github.com/alza54/find-web-session-challenge/issues"
+  },
+  "author": {
+    "name": "alza54",
+    "url": "https://github.com/alza54"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "cargo-cp-artifact -nc index.node -- cargo build --message-format=json-render-diagnostics",
+    "build:debug": "pnpm run build --",
+    "build:release": "pnpm run build -- --release",
+    "install": "pnpm run build-release",
+    "test": "cargo test"
+  },
+  "devDependencies": {
+    "cargo-cp-artifact": "^0.1.8"
+  },
+  "packageManager": "pnpm@8.14.3"
+}
