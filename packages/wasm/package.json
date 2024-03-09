@@ -1,0 +1,31 @@
+{
+  "name": "@web-steganography-rs/wasm",
+  "private": true,
+  "version": "0.1.0",
+  "description": "LSB steganography image decoding Rust Neon binding for Node.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "purge": "rimraf dist pkg",
+    "clean": "pnpm run purge && cargo clean",
+    "build": "pnpm run clean && wasm-pack build && webpack",
+    "serve": "webpack serve",
+    "install": "pnpm run build",
+    "test": "cargo test"
+  },
+  "devDependencies": {
+    "@wasm-tool/wasm-pack-plugin": "^1.7.0",
+    "html-webpack-plugin": "^5.6.0",
+    "rimraf": "^5.0.5",
+    "text-encoding": "^0.7.0",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "pnpm@8.14.3",
+  "nx": {
+    "includedScripts": []
+  }
+}

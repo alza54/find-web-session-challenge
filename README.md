@@ -11,3 +11,9 @@ TODO
 - [ ] Protobufs
 - [ ] AES-256-GCM
 - [ ] Separate this into solutions to not spoil the challenge
+
+- [ ] Make common package
+- [ ] Export more
+- [ ] Make UI package
+
+- [ ] Implement code editor

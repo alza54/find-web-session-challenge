@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "es2022",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "lib": ["es2022"],
     "strict": true,
     "esModuleInterop": true,
@@ -11,17 +11,15 @@
     "baseUrl": ".",
     "skipLibCheck": true,
     "incremental": true,
-    "noEmit": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "removeComments": true,
     "sourceMap": true,
   },
-  "exclude": ["node_modules"],
   "include": [
-    ".eslintrc.js",
-    "commitlint.config.js",
-    "client/**/*",
-    "server/**/*"
-  ]
+    "website/client/**/*",
+    "website/server/**/*",
+    "packages/**/*"
+  ],
+  "exclude": ["node_modules"]
 }

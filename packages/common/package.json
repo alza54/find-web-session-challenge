@@ -1,0 +1,23 @@
+{
+  "name": "@web-steganography-rs/common",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Common utilities, e.g. for encoding and decoding strings",
+  "scripts": {
+    "purge": "rimraf dist pkg",
+    "clean": "pnpm run purge && cargo clean",
+    "build": "pnpm run clean && cargo build",
+    "install": "pnpm run build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "rimraf": "^5.0.5"
+  },
+  "packageManager": "pnpm@8.14.3",
+  "nx": {
+    "includedScripts": []
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@web-steganography-rs/node-native",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Rust least-significant-bit image steganography library with Neon bindings for Node.js",
+  "main": "index.js",
+  "scripts": {
+    "purge": "rimraf dist pkg",
+    "clean": "pnpm run purge && cargo clean",
+    "build": "pnpm run clean && cargo-cp-artifact -nc index.node -- cargo build --message-format=json-render-diagnostics",
+    "install": "pnpm run build",
+    "test": "cargo test"
+  },
+  "devDependencies": {
+    "cargo-cp-artifact": "^0.1.8",
+    "jest": "^29.7.0",
+    "rimraf": "^5.0.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "pnpm@8.14.3",
+  "nx": {
+    "includedScripts": []
+  }
+}

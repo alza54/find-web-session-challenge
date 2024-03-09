@@ -1,0 +1,7 @@
+{
+  "rust-analyzer.linkedProjects": [
+    "./packages/common/Cargo.toml",
+    "./packages/node-native/Cargo.toml",
+    "./packages/wasm/Cargo.toml"
+  ]
+}

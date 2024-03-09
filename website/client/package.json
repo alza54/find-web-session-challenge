@@ -1,0 +1,33 @@
+{
+  "name": "@web-steganography-hackme/frontend",
+  "version": "0.1.0",
+  "description": "The challenge's website in Nuxt 3 (Vue 3) and Typescript",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "clean": "rimraf .nuxt dist",
+    "build": "pnpm run clean && nx build",
+    "start": "nuxt start",
+    "start:dev": "nx serve",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "install": "rimraf public/w/**",
+    "postinstall": "nuxt prepare && pnpm run wasm:link",
+    "wasm:link": "ln -s node_modules/@web-steganography-rs/wasm public/w"
+  },
+  "dependencies": {
+    "jest": "^29.7.0",
+    "nuxt": "^3.10.3",
+    "rimraf": "^5.0.5",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0",
+    "@web-steganography-rs/wasm": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "pnpm@8.14.3",
+  "nx": {
+    "includedScripts": []
+  }
+}

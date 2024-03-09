@@ -1,0 +1,45 @@
+name: Rust Lint and Test
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  clippy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Rust
+      run: |
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        source $HOME/.cargo/env
+        rustup component add clippy
+
+    - name: Install WebAssembly Pack
+      run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+    - name: Cargo Test for Node Native
+      run: cargo test
+      working-directory: packages/node-native
+
+    - name: Cargo Test for Web Assembly
+      run: cargo test
+      working-directory: packages/wasm
+
+    - name: WebAssembly Test for Chrome
+      run: wasm-pack test --headless --chrome
+      working-directory: packages/wasm
+
+    - name: WebAssembly Test for Firefox
+      run: wasm-pack test --headless --firefox
+      working-directory: packages/wasm
+
+    - name: Run Clippy (linter) for Node Native
+      run: |
+        cargo clippy -- -D warnings
+      working-directory: packages/node-native
+
+    - name: Run Clippy )linter for Web Assembly
+      run: |
+        cargo clippy -- -D warnings
+      working-directory: packages/wasm

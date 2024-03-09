@@ -3,9 +3,23 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020,
-    project: './tsconfig.json'
+    project: './tsconfig.json',
+    extraFileExtensions: ['.json']
   },
+  env: {
+    es6: true,
+    node: true,
+    browser: true
+  },
+  plugins: [
+    '@typescript-eslint',
+    'json'
+  ],
   overrides: [
+    {
+      files: ['.json'],
+      extends: ['plugin:json/recommended']
+    },
     {
       files: ['.js', '.jsx', '.ts', '.tsx'],
       extends: 'standard-with-typescript',
