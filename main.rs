@@ -1,5 +1,5 @@
 use core::fmt;
-use std::env;
+use std::{env, path};
 use image::{DynamicImage, ImageBuffer, Pixel, Rgba, RgbaImage};
 
 struct EncodeConfig {
@@ -143,7 +143,7 @@ fn encode_image(img: &RgbaImage, message: &str, encoding_input: CharacterEncodin
 
   if encoding.to_string() != encoding_input.to_string() {
     if config.no_panic {
-      println!("Error: The encoding of the message does not match the encoding input");
+      eprintln!("Error: The encoding of the message does not match the encoding input");
       return encoded_img;
     } else {
       panic!("Fatal Error: The encoding of the message does not match the encoding input");
@@ -169,8 +169,6 @@ fn encode_image(img: &RgbaImage, message: &str, encoding_input: CharacterEncodin
       })
   );
 
-  let mut i_bits = 0;
-
   for (x, y, pixel) in encoded_img.enumerate_pixels_mut() {
     // White pixels often correspond to background,
     // and should be left untouched if possible.
@@ -193,8 +191,6 @@ fn encode_image(img: &RgbaImage, message: &str, encoding_input: CharacterEncodin
       if let Some(bit) = iter_chain() {
         let bit: u8 = bit.to_digit(10).unwrap() as u8;
 
-        i_bits+=1;
-
         pixel.0[i] &= 0xFE; // Clear the least significant bit
 
         if config.debug {
@@ -203,7 +199,6 @@ fn encode_image(img: &RgbaImage, message: &str, encoding_input: CharacterEncodin
 
         pixel.0[i] |= bit; // Set the least significant bit to the message bit
       } else {
-        println!("Bits modified: {}\n", i_bits);
         // Stop if there are no more bits to encode
         return encoded_img;
       }
@@ -267,8 +262,10 @@ fn decode_image(img: &RgbaImage, config: EncodeConfig) -> String {
         let encoding_enum_value = character_encoding.as_ref();
         let encoding = encoding_enum_value.unwrap().to_bit_value();
 
-        println!("Message Length: {:?}", message_length.unwrap());
-        println!("Encoding: {:?}", encoding_enum_value.unwrap().to_string());
+        if config.debug {
+          println!("Message Length: {:?}", message_length.unwrap());
+          println!("Encoding: {:?}", encoding_enum_value.unwrap().to_string());
+        }
 
         if encoding == CharacterEncoding::ASCII.to_bit_value() {
           let message_vec: Vec<char> = bit_iter[40..]
