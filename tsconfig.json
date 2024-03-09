@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["es2022"],
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "baseUrl": ".",
+    "skipLibCheck": true,
+    "incremental": true,
+    "noEmit": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "removeComments": true,
+    "sourceMap": true,
+  },
+  "exclude": ["node_modules"],
+  "include": [
+    ".eslintrc.js",
+    "commitlint.config.js",
+    "client/**/*",
+    "server/**/*"
+  ]
+}
